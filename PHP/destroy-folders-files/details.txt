@@ -1,0 +1,2 @@
+1. Put this file inside any directory and run the file, it will destroy all the 
+   files.

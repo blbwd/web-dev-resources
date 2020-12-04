@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Email with attachment</title>
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="pageone">
+  <div data-role="header">
+  <h1>Email with Attachment</h1>
+  </div>
+  <div data-role="main" class="ui-content">
+    <form name="contactform" method="post" action="email.php">
+    <input type="hidden" name="hid_enquireform" value="1">  
+      <div class="ui-field-contain">
+        <label for="fullname">Full Name:</label>
+        <input type="text" name="name" id="fullname" placeholder="John Doe" data-clear-btn="true" required>       
+        <label for="email">E-mail:</label>
+        <input type="email" name="email" id="email" placeholder="yorname@yourdomain.com" data-clear-btn="true" required>
+        <label for="phonenumber">Phone Number:</label>
+        <input type="number" name="phone" id="phonenumber" placeholder="1234567890" data-clear-btn="true"> 
+        <label for="message">Your Message:</label>
+        <textarea name="message" id="message" placeholder="Type your message here" required></textarea>  
+      </div>
+      <input type="submit" data-inline="true" value="Submit">
+    </form>
+  </div>
+
+</div>
+
+</body>
+</html>
