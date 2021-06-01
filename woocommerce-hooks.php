@@ -118,4 +118,62 @@ $data['order_comments'] = strtoupper($data['order_comments']);
 
 return $data;
 }
+
+// 6. Add contact form 7 in product page when the product is out of stock
+add_action( 'woocommerce_single_product_summary', 'woocommerce_single_product_inquiry', 30 );
+
+function woocommerce_single_product_inquiry() {
+   global $product;
+   if ( ! $product->is_in_stock() ) {
+echo '<button type="submit" id="trigger_cf" class="single_add_to_cart_button button alt">Let me know when this product is back in stock.</button>';
+echo '<div id="product_inq" style="display:none">';
+echo do_shortcode('[contact-form-7 id="6823" title="Product enquiry form"]');
+echo '</div>';
+   }
+    else {
+     return;
+         }
+}
+
+
+add_action( 'woocommerce_single_product_summary', 'inquiry_on_click_show_form_and_populate', 40 );
+function inquiry_on_click_show_form_and_populate() {
+?>
+<script type="text/javascript">
+jQuery('#trigger_cf').on('click', function(){
+if ( jQuery(this).text() == 'Let me know when this product is back in stock.' ) {
+jQuery('#product_inq').css("display","block");
+jQuery('input[name="your-subject"]').val('<?php the_title(); ?>');
+jQuery("#trigger_cf").html('Close the form');
+} else {
+jQuery('#product_inq').hide();
+jQuery("#trigger_cf").html('Let me know when this product is back in stock.');
+}
+});
+</script>
+<?php
+
+}
+
+// 7. Unset ALL Shipping Rates in ALL Zones when ANY Free Shipping Rate is Available
+add_filter( 'woocommerce_package_rates', 'bbloomer_unset_shipping_when_free_is_available_all_zones', 10, 2 );
+   
+function bbloomer_unset_shipping_when_free_is_available_all_zones( $rates, $package ) {
+      
+$all_free_rates = array();
+     
+foreach ( $rates as $rate_id => $rate ) {
+      if ( 'free_shipping' === $rate->method_id ) {
+         $all_free_rates[ $rate_id ] = $rate;
+         break;
+      }
+}
+     
+if ( empty( $all_free_rates )) {
+        return $rates;
+} else {
+        return $all_free_rates;
+} 
+ 
+}
 ?>

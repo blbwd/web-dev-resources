@@ -1,3 +1,29 @@
+###ADD SSl / HTTPS
+1. Go to Settings-->General and 'https://' for website address and site address fields.
+2. In wp-config.php file add the following code before
+/* That's all, stop editing! Happy blogging. */
+define('FORCE_SSL_ADMIN', true);
+3. Add following code in .htaccess file
+```
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# BEGIN WordPress
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+```
+
+###Update WordPress Automatically Without Using FTP
+1. Open /wp-config.php
+2. Paste the following code to your wp-config.php file, preferably just below every other line of code.
+define('FS_METHOD','direct');
+
+
 ###Theme directory path
 ```
 <?php echo get_template_directory_uri(); ?>/
