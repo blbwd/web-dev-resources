@@ -239,4 +239,15 @@ add_action( 'wp_enqueue_scripts', 'wp_custom_css_load' );
 // 21. Disable admin bar for all users but admins in the front end
   show_admin_bar(false);
 
+// 22. Function to change default sender email address
+function wp_sender_email( $original_email_address ) {
+    return 'info@yourdomain.com';
+} 
+add_filter( 'wp_mail_from', 'wp_sender_email' );
+
+// 23. Function to change default email sender name
+function wp_sender_name( $original_email_from ) {
+    return 'Your Company Name';
+}
+add_filter( 'wp_mail_from_name', 'wp_sender_name' );
 ?>
