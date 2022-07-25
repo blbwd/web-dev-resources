@@ -25,3 +25,5 @@ Upload the functions.php file inside theme folder or use specific function as pe
 19. Enqueue script in footer
 20. Enqueue CSS in header
 21. Disable admin bar for all users but admins in the front end
+22. Change default sender email address
+23. Change default email sender name
